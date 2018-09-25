@@ -21,4 +21,18 @@
 # Namespace API
 - Api list
     - `clone()`, `unshare()`, `setn()`
+    - clone():
+        - clone a function into different namespace
+        - clone(func , stack_p, flags, arguments to func);
+        - related usefule api
+            - `uname(&uts_struct)` copy the system details to uts_struct 
+            - `sethostname(str, strlen)` set the hostname of the new namespace 
+        - `ls -l /proc/pid/ns` shows the namespace links
+        - opening a file descriptor of a namespace file will keep the namespace in `proc` dir even though process is end.
+    - setns():
+        - join an existing namespace to a process
+        - `setns(file_descriptor, nstype)` return `-1` if error occurs
+    - unshare()
+        - leaving a namespace 
+        - `unshare(nsflag)` leave the current namespace 
     - 
