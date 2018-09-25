@@ -17,3 +17,8 @@
         2. routing table
     6. `User Namespace`: Isolete user and group id. multiple process can have same user with same id. 
         1. An unprivileged user can used as root privileged user inside a namespace. 
+
+# Namespace API
+- Api list
+    - `clone()`, `unshare()`, `setn()`
+    - 
