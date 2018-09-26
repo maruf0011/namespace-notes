@@ -35,4 +35,22 @@
     - unshare()
         - leaving a namespace 
         - `unshare(nsflag)` leave the current namespace 
-    - 
+
+# PID NAMESPACE
+- flag for pid namespace is `CLONE_NEWPID`
+- while calling `clone()` with `CLONE_NEWPID` then the process PID will be created in another PID namespace created by `procfs`
+- to view the PID's the `/proc` dir should be mounted on another dir
+- `procfs` is a filesystem for PID namespace abstruction
+- never use the ```/proc``` file for new PID namespace. because it confused the root system. or `host' system
+- one process can view the other process if it's resides in same namespace or it's the parent of the namespace.
+- ## int process
+    - the first process in a new namespace works as init process
+    - init process became the parent process of the other orphaned process in that namespace 
+    - `signals` that can be delivered to init are those for which the process has established a `signal handler`
+    - `PID namespace` will also be destroyed when it's `init process terminates`.
+    -  it is not possible to `create new processes` in the namespace `(via setns() plus fork())` the lack of an init process is detected during the fork() call, which fails with an `ENOMEM` error
+        - if a namespace doesn't have a `init process` namespace then it's not possible to create a process in that namespace
+    - The `ps` a command lists all processes accessible via `/proc`
+        - to work `ps` `proc` from `procfs` need to mount on `/proc`
+    - orphan process created in a different namespace will have the init process as the parent process.
+
